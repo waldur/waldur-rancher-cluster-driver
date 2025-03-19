@@ -3,11 +3,11 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/rancher/rancher/pkg/kontainer-engine/types"
+	"github.com/waldur/waldur-rancher-cluster-driver/driver"
 	"os"
 	"strconv"
 	"sync"
-	"github.com/rancher/rancher/pkg/kontainer-engine/types"
-	"github.com/waldur/waldur-rancher-cluster-driver/driver"
 )
 
 var wg = &sync.WaitGroup{}
