@@ -44,11 +44,11 @@ func getStateFromOptions(driverOptions *types.DriverOptions) state {
 	s := state{}
 	s.DisplayName = options.GetValueFromDriverOptions(driverOptions, types.StringType, "display-name", "displayName").(string)
 	s.Name = options.GetValueFromDriverOptions(driverOptions, types.StringType, "name").(string)
+	s.Url = options.GetValueFromDriverOptions(driverOptions, types.StringType, "waldur-url", "waldurUrl").(string)
+	s.Token = options.GetValueFromDriverOptions(driverOptions, types.StringType, "waldur-token", "waldurToken").(string)
 	s.OfferingUuid = options.GetValueFromDriverOptions(driverOptions, types.StringType, "offering-uuid", "offeringUuid").(string)
 	s.PlanUuid = options.GetValueFromDriverOptions(driverOptions, types.StringType, "plan-uuid", "planUuid").(string)
 	s.ProjectUuid = options.GetValueFromDriverOptions(driverOptions, types.StringType, "project-uuid", "projectUuid").(string)
-	s.Url = options.GetValueFromDriverOptions(driverOptions, types.StringType, "waldur-url", "waldurUrl").(string)
-	s.Token = options.GetValueFromDriverOptions(driverOptions, types.StringType, "waldur-token", "waldurToken").(string)
 	s.Cores = options.GetValueFromDriverOptions(driverOptions, types.IntType, "cores").(int)
 	s.Ram = options.GetValueFromDriverOptions(driverOptions, types.IntType, "ram").(int)
 	s.Storage = options.GetValueFromDriverOptions(driverOptions, types.IntType, "storage").(int)
@@ -230,6 +230,19 @@ func (d *Driver) Remove(ctx context.Context, clusterInfo *types.ClusterInfo) err
 }
 
 func (d *Driver) GetVersion(ctx context.Context, clusterInfo *types.ClusterInfo) (*types.KubernetesVersion, error) {
+	_, err := getState(clusterInfo)
+
+	if err != nil {
+		return nil, err
+	}
+
+	// TODO: get cluster info using state
+
+	if err != nil {
+		return nil, fmt.Errorf("error getting cluster info: %v", err)
+	}
+
+	// return &types.KubernetesVersion{Version: *cluster.KubernetesVersion}, nil
 	return nil, nil
 }
 
