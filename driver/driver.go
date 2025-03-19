@@ -205,7 +205,10 @@ func (d *Driver) Create(ctx context.Context, opts *types.DriverOptions, clusterI
 
 	logrus.Infof("Successfully created tenant %s", s.Name)
 	info := types.ClusterInfo{}
-	storeState(&info, &s)
+	err = storeState(&info, &s)
+	if err != nil {
+		return &info, err
+	}
 
 	return &info, nil
 
