@@ -245,7 +245,7 @@ func (d *Driver) SetClusterSize(ctx context.Context, clusterInfo *types.ClusterI
 
 // Get driver capabilities
 func (d *Driver) GetCapabilities(ctx context.Context) (*types.Capabilities, error) {
-	return nil, nil
+	return &d.driverCapabilities, nil
 }
 
 // Remove legacy service account token
